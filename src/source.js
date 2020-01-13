@@ -8,9 +8,9 @@ import OSM from 'ol/source/OSM';
 import {transform} from 'ol/proj';
 
 // coordonnées récupérées depuis https://www.latlong.net/convert-address-to-lat-long.html
-var nws = transform([1.066530, 49.428470], 'EPSG:4326', 'EPSG:3857');
+const nws = transform([1.066530, 49.428470], 'EPSG:4326', 'EPSG:3857');
 
-var map = new Map({
+const map = new Map({
   interactions: defaultInteractions().extend([
     new DragRotateAndZoom()
   ]),
