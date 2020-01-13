@@ -71,23 +71,23 @@ const map = new Map({
   })
 });
 
-let selected = null;
+let hovered = null;
 const status = document.getElementById('status');
 
 map.on('pointermove', function(event) {
-    if (selected !== null) {
-        selected.setStyle(undefined);
-        selected = null;
+    if (hovered !== null) {
+        hovered.setStyle(undefined);
+        hovered = null;
     }
 
     map.forEachFeatureAtPixel(event.pixel, function(feat) {
-        selected = feat;
-        selected.setStyle(styles.HighlightedPoint);
+        hovered = feat;
+        hovered.setStyle(styles.HighlightedPoint);
         return true;
     });
 
-    if (selected) {
-        status.innerHTML = selected.get('name');
+    if (hovered) {
+        status.innerHTML = hovered.get('name');
         status.style.top = `${event.pointerEvent.clientY}px`;
         status.style.left = `${event.pointerEvent.clientX}px`;
     } else {
