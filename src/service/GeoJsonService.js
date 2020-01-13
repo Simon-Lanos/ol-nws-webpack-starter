@@ -1,5 +1,7 @@
-const GPS_VAL = 'EPSG:4326';
+import {transform} from 'ol/proj';
 
+const GPS_VAL = 'EPSG:4326';
+const GEO_VAL = 'EPSG:3857';
 
 export default function getGeoJson() {
     return {
@@ -10,6 +12,24 @@ export default function getGeoJson() {
                 'name': GPS_VAL
             }
         },
-        'features': []
+        'features': [{
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                "coordinates": transform([1.066530, 49.428470], GPS_VAL, GEO_VAL)
+            }
+        }, {
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                "coordinates": transform([1.064670, 49.422218], GPS_VAL, GEO_VAL)
+            }
+        }, {
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                "coordinates": transform([1.120290, 49.450932], GPS_VAL, GEO_VAL)
+            }
+        }]
     };
 }
