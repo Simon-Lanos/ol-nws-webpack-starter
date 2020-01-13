@@ -8,6 +8,7 @@ import {OSM, Vector as VectorSource} from 'ol/source';
 import {transform} from 'ol/proj';
 import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
 import GeoJSON from 'ol/format/GeoJSON';
+import Overlay from 'ol/Overlay';
 
 import getGeoJson from './service/GeoJsonService';
 const GeoJsonObj = getGeoJson();
@@ -53,6 +54,23 @@ const vectorLayer = new VectorLayer({
     style: styleFunction
 });
 
+const container = document.getElementById('popup');
+const content = document.getElementById('popup-content');
+const closer = document.getElementById('popup-closer');
+
+const overlay = new Overlay({
+    element: container,
+    autoPan: true,
+    autoPanAnimation: {
+        duration: 250
+    }
+});
+
+closer.onclick = function() {
+    overlay.setPosition(undefined);
+    closer.blur();
+};
+
 const map = new Map({
   interactions: defaultInteractions().extend([
     new DragRotateAndZoom()
@@ -63,6 +81,7 @@ const map = new Map({
     }),
     vectorLayer
   ],
+  overlays: [overlay],
   target: 'carteNWS',
   view: new View({
     projection: 'EPSG:3857',
@@ -92,5 +111,23 @@ map.on('pointermove', function(event) {
         status.style.left = `${event.pointerEvent.clientX}px`;
     } else {
         status.innerHTML = '';
+    }
+});
+
+let cliked = null;
+
+map.on('singleclick', function(event) {
+    if (cliked !== null) {
+        cliked = null;
+    }
+
+    map.forEachFeatureAtPixel(event.pixel, function(feat) {
+        cliked = feat;
+        return true;
+    });
+
+    if (cliked) {
+        content.innerText = cliked.get('description');
+        overlay.setPosition(event.coordinate);
     }
 });
