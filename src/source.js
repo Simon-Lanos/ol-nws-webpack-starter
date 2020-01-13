@@ -23,9 +23,20 @@ const image = new CircleStyle({
     stroke: new Stroke({color: 'red', width: 1})
 });
 
+const highlightedImage = new CircleStyle({
+    radius: 8,
+    fill: new Fill({
+        color: 'red'
+    }),
+    stroke: new Stroke({color: 'red', width: 1})
+});
+
 const styles = {
     'Point': new Style({
         image: image
+    }),
+    'HighlightedPoint': new Style({
+        image: highlightedImage
     }),
 };
 
@@ -58,4 +69,28 @@ const map = new Map({
     center: nws,
     zoom: 14
   })
+});
+
+let selected = null;
+const status = document.getElementById('status');
+
+map.on('pointermove', function(event) {
+    if (selected !== null) {
+        selected.setStyle(undefined);
+        selected = null;
+    }
+
+    map.forEachFeatureAtPixel(event.pixel, function(feat) {
+        selected = feat;
+        selected.setStyle(styles.HighlightedPoint);
+        return true;
+    });
+
+    if (selected) {
+        status.innerHTML = selected.get('name');
+        status.style.top = `${event.pointerEvent.clientY}px`;
+        status.style.left = `${event.pointerEvent.clientX}px`;
+    } else {
+        status.innerHTML = '';
+    }
 });

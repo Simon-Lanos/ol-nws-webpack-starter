@@ -17,18 +17,27 @@ export default function getGeoJson() {
             'geometry': {
                 'type': 'Point',
                 "coordinates": transform([1.066530, 49.428470], GPS_VAL, GEO_VAL)
+            },
+            'properties': {
+                'name': 'Normandie Web School'
             }
         }, {
             'type': 'Feature',
             'geometry': {
                 'type': 'Point',
                 "coordinates": transform([1.064670, 49.422218], GPS_VAL, GEO_VAL)
+            },
+            'properties': {
+                'name': 'Copeaux numérique'
             }
         }, {
             'type': 'Feature',
             'geometry': {
                 'type': 'Point',
                 "coordinates": transform([1.120290, 49.450932], GPS_VAL, GEO_VAL)
+            },
+            'properties': {
+                'name': 'ISD Flaubert'
             }
         }]
     };
