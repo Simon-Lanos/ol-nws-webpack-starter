@@ -107,3 +107,8 @@ dist
 .idea
 .idea/
 .idea/*
+
+# Public
+public
+public/
+public/*
