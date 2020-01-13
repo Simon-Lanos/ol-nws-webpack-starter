@@ -6,7 +6,7 @@ import {defaults as defaultInteractions, DragRotateAndZoom} from 'ol/interaction
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import {OSM, Vector as VectorSource} from 'ol/source';
 import {transform} from 'ol/proj';
-import {Circle as CircleStyle, Stroke, Style} from 'ol/style';
+import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
 import GeoJSON from 'ol/format/GeoJSON';
 
 import getGeoJson from './service/GeoJsonService';
@@ -17,7 +17,9 @@ const nws = transform([1.066530, 49.428470], 'EPSG:4326', 'EPSG:3857');
 
 const image = new CircleStyle({
     radius: 5,
-    fill: null,
+    fill: new Fill({
+        color: 'red'
+    }),
     stroke: new Stroke({color: 'red', width: 1})
 });
 
