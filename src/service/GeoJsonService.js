@@ -19,8 +19,12 @@ export default function getGeoJson() {
                 "coordinates": transform([1.066530, 49.428470], GPS_VAL, GEO_VAL)
             },
             'properties': {
-                'name': 'Normandie Web School',
-                'description': 'École du numérique'
+                'sites': [
+                    {
+                        'name': 'Normandie Web School',
+                        'description': 'École du numérique'
+                    }
+                ],
             }
         }, {
             'type': 'Feature',
@@ -29,8 +33,12 @@ export default function getGeoJson() {
                 "coordinates": transform([1.064670, 49.422218], GPS_VAL, GEO_VAL)
             },
             'properties': {
-                'name': 'Copeaux numérique',
-                'description': 'Fab Lab pour les pauvres'
+                'sites': [
+                    {
+                        'name': 'Copeaux numérique',
+                        'description': 'Fab Lab pour les pauvres'
+                    }
+                ],
             }
         }, {
             'type': 'Feature',
@@ -39,8 +47,12 @@ export default function getGeoJson() {
                 "coordinates": transform([1.120290, 49.450932], GPS_VAL, GEO_VAL)
             },
             'properties': {
-                'name': 'ISD Flaubert',
-                'description': 'École de commerce'
+                'sites': [
+                    {
+                        'name': 'ISD Flaubert',
+                        'description': 'École de commerce'
+                    }
+                ],
             }
         }]
     };
