@@ -10,6 +10,7 @@ import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
 import GeoJSON from 'ol/format/GeoJSON';
 import Overlay from 'ol/Overlay';
 
+import Modal from './view/ModalView';
 import getGeoJson from './service/GeoJsonService';
 const GeoJsonObj = getGeoJson();
 
@@ -127,7 +128,7 @@ map.on('singleclick', function(event) {
     });
 
     if (cliked) {
-        content.innerText = cliked.get('description');
+        Modal(content, cliked.get('sites'));
         overlay.setPosition(event.coordinate);
     }
 });
